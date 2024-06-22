@@ -1,7 +1,6 @@
 const express = require('express');
+const connectDB = require('./lib/db');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const config = require('./config');
 const { authRoutes, userRoutes, groupRoutes } = require('./routes');
 const {
   authenticateToken,
@@ -16,13 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose
-  .connect(config.MONGO_URI, {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log(err));
+connectDB();
 
 // Use routes
 app.use('/api', authRoutes); // e.g., /api/login, /api/logout
