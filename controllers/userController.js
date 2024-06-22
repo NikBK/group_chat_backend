@@ -1,20 +1,30 @@
-const config = require('../config');
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
 
 async function createUser(req, res) {
   const { username, email, password } = req.body;
   try {
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, config.SALT_ROUND); // 10 is the saltRounds parameter
-
-    // Create a new user with hashed password
-    const user = new User({ username, email, password: hashedPassword });
+    const user = new User({ username, email, password });
     await user.save();
     res.status(201).json(user);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
+  }
+}
+
+async function editUser(req, res) {
+  const userId = req.params.id;
+  const { username, email, password, isAdmin } = req.body;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, { username, email, password, isAdmin }, { new: true });
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    res.json({ user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Server error. Failed to update user.' });
   }
 }
 
@@ -30,4 +40,4 @@ async function getUsers(req, res) {
 
 // Other controller functions like editUser, deleteUser can be implemented similarly
 
-module.exports = { createUser, getUsers };
+module.exports = { createUser, editUser, getUsers };

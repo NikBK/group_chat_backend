@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const config = require('../config');
@@ -29,4 +29,26 @@ function logout(req, res) {
   res.json({ message: 'Logout successful' });
 }
 
-module.exports = { login, logout };
+async function signup(req, res) {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if email is already registered
+    let existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already exists. Please use a different email.' });
+    }
+
+    // Create a new user
+    const newUser = new User({ username, email, password });
+    await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully', user: newUser });
+  } catch (error) {
+    console.error('Error in signup:', error);
+    res.status(500).json({ message: 'Server error. Failed to register user.' });
+  }
+}
+
+
+module.exports = { login, logout, signup };
