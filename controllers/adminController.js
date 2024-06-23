@@ -1,3 +1,4 @@
+const { hashPassword } = require('../lib/utils');
 const User = require('../models/User');
 
 async function createUser(req, res) {
@@ -22,7 +23,10 @@ async function editUser(req, res) {
     const { username, email, password } = req.body;
 
     try {
-        const updatedUser = await User.findByIdAndUpdate(userId, { username, email, password }, { new: true });
+        if (password) {
+            var hashedPassword = await hashPassword(password);
+        }
+        const updatedUser = await User.findByIdAndUpdate(userId, { username, email, password: hashedPassword }, { new: true });
         if (!updatedUser) {
             return res.status(404).json({ error: 'User not found.' });
         }
