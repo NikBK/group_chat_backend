@@ -15,8 +15,8 @@ app.use(bodyParser.json());
 connectToDB();
 
 // Use routes
-app.use('/api/auth', authRoutes); // e.g., /api/login, /api/logout
-app.use('/api/admin', verifyAdmin, adminRoutes); // e.g., /api/admin/createUser, /api/admin/user/123
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', verifyAdmin, adminRoutes);
 app.use('/api/groups', authenticateToken, groupRoutes);
 app.use('/api/groups', authenticateToken, groupMessageRoutes);
 

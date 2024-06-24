@@ -4,7 +4,7 @@ import { sendMessage, likeMessage } from '../controllers/groupMessageController.
 
 const router = Router();
 
-router.post('/:groupId/messages/send', sendMessage); // POST route to send a message to a group
-router.post('/:groupId/messages/:messageId/like', likeMessage); // POST route to like a group message
+router.post('/:groupId/messages/send', sendMessage);            // POST /api/groups/:groupId/messages/send              (Send message in group)
+router.post('/:groupId/messages/:messageId/like', likeMessage); // POST /api/groups/:groupId/messages/:messageId/like   (Like message in group)
 
 export { router };
