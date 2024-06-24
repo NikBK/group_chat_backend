@@ -1,7 +1,5 @@
-import jwt from 'jsonwebtoken';
 import { User } from '../models/User.js';
-import { config } from '../config.js';
-import { comparePassword } from '../lib/utils.js';
+import { comparePassword, generateJWTtoken } from '../lib/utils.js';
 
 
 async function login(req, res) {
@@ -18,7 +16,7 @@ async function login(req, res) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ userId: user._id }, config.JWT_SECRET);
+    const token = generateJWTtoken(user);
     res.json({ token });
   } catch (err) {
     console.error(err);
