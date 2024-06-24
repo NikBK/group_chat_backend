@@ -1,6 +1,6 @@
 # Group Chat Backend
 
-Welcome to the backend repository for [Group Chat Backend]. This repository contains the server-side implementation for user authentication, admin operations, group management, and messaging functionalities.
+Welcome to the backend repository for 'Group Chat'. This repository contains the server-side implementation for user authentication, admin operations, group management, and messaging functionalities.
 
 ## Technologies Used
 
@@ -9,6 +9,7 @@ Welcome to the backend repository for [Group Chat Backend]. This repository cont
 - MongoDB
 - Mongoose
 - JSON Web Tokens (JWT) for authentication
+- Testing libraries like chai, mocha, supertest
 
 ## Getting Started
 
