@@ -9,6 +9,8 @@ const UserSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
+
+// Middleware to hash the password before saving to database
 UserSchema.pre('save', async function (next) {
   try {
     if (!this.isModified('password')) {

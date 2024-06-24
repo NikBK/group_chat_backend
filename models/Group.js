@@ -16,6 +16,7 @@ const GroupSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+
 // Pre-save hook to set default members to createdBy if not provided
 GroupSchema.pre('save', async function (next) {
   try {
