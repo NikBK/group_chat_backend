@@ -1,5 +1,6 @@
-const { hashPassword } = require('../lib/utils');
-const User = require('../models/User');
+import { hashPassword } from '../lib/utils.js';
+import { User } from '../models/User.js';
+
 
 async function createUser(req, res) {
     const { username, email, password } = req.body;
@@ -37,4 +38,4 @@ async function editUser(req, res) {
     }
 }
 
-module.exports = { createUser, editUser };
+export { createUser, editUser };

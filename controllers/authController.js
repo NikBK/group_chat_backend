@@ -1,7 +1,9 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const config = require('../config');
-const { comparePassword } = require('../lib/utils');
+// const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import { User } from '../models/User.js';
+import { config } from '../config.js';
+import { comparePassword } from '../lib/utils.js';
+
 
 async function login(req, res) {
   const { email, password } = req.body;
@@ -51,4 +53,4 @@ async function signup(req, res) {
 }
 
 
-module.exports = { login, logout, signup };
+export { login, logout, signup };

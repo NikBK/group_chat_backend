@@ -1,5 +1,6 @@
-const Group = require('../models/Group');
-const User = require('../models/User');
+import { Group } from '../models/Group.js';
+import { User } from '../models/User.js';
+
 
 async function createGroup(req, res) {
   const { name, members } = req.body;
@@ -61,10 +62,11 @@ async function deleteGroup(req, res) {
   const groupId = req.params.id;
 
   try {
-    const deletedGroup = await Group.findByIdAndDelete(groupId);
-    if (!deletedGroup) {
+    const group = await Group.findById(groupId);
+    if (!group) {
       return res.status(404).json({ error: 'Group not found.' });
     }
+    await group.deleteOne();
     res.json({ message: 'Group deleted successfully.' });
   } catch (error) {
     console.error('Error deleting group:', error);
@@ -72,4 +74,4 @@ async function deleteGroup(req, res) {
   }
 }
 
-module.exports = { createGroup, searchGroups, addMembers, deleteGroup };
+export { createGroup, searchGroups, addMembers, deleteGroup };

@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const config = require('../config');
+import jwt from 'jsonwebtoken';
+import { User } from '../models/User.js';
+import { config } from '../config.js';
+
 
 const verifyAdmin = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -15,7 +16,7 @@ const verifyAdmin = async (req, res, next) => {
         if (!user || !user.isAdmin) {
             return res.status(403).json({ error: 'Not authorized to access this resource' });
         }
-        req.user = user; // Attach user object to request for further processing if needed
+        req.user = user;
         next();
     } catch (error) {
         console.error('Token verification error:', error);
@@ -23,4 +24,4 @@ const verifyAdmin = async (req, res, next) => {
     }
 };
 
-module.exports = { verifyAdmin };
+export { verifyAdmin };

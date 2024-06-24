@@ -12,7 +12,7 @@ function handleGlobalError(err, req, res, next) {
   });
 }
 
-module.exports = {
+export {
   handle404Error,
   handleGlobalError,
 };

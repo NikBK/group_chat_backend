@@ -1,8 +1,9 @@
-const { authenticateToken } = require('./authMiddleware');
-const { handle404Error, handleGlobalError } = require('./errorHandler');
-const { verifyAdmin } = require('./verifyAdmin');
+import { authenticateToken } from './authMiddleware.js';
+import { handle404Error, handleGlobalError } from './errorHandler.js';
+import { verifyAdmin } from './verifyAdmin.js';
 
-module.exports = {
+
+export {
   authenticateToken,
   handle404Error,
   handleGlobalError,

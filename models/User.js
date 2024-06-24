@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const { hashPassword } = require('../lib/utils');
+import mongoose from 'mongoose';
+import { hashPassword } from '../lib/utils.js';
+
 
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
@@ -20,6 +21,4 @@ UserSchema.pre('save', async function (next) {
   }
 });
 
-const User = mongoose.model('User', UserSchema);
-
-module.exports = User;
+export const User = mongoose.model('User', UserSchema);

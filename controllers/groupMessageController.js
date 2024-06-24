@@ -1,4 +1,5 @@
-const GroupMessage = require('../models/GroupMessage');
+import { GroupMessage } from '../models/GroupMessage.js';
+
 
 async function sendMessage(req, res) {
     const { groupId } = req.params;
@@ -44,4 +45,4 @@ async function likeMessage(req, res) {
     }
 }
 
-module.exports = { sendMessage, likeMessage };
+export { sendMessage, likeMessage };

@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { GroupMessage } from './GroupMessage.js';
+
 
 const GroupSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -29,6 +31,16 @@ GroupSchema.pre('save', async function (next) {
   }
 });
 
-const Group = mongoose.model('Group', GroupSchema);
+// Middleware to handle cascading delete of GroupMessages
+GroupSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
+  try {
+    // Remove all GroupMessages associated with this group
+    await GroupMessage.deleteMany({ group: this._id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
-module.exports = Group;
+
+export const Group = mongoose.model('Group', GroupSchema);

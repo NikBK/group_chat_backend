@@ -1,12 +1,10 @@
-const authRoutes = require('./authRoutes');
-const userRoutes = require('./userRoutes');
-const groupRoutes = require('./groupRoutes');
-const groupMessageRoutes = require('./groupMessageRoutes');
-const adminRoutes = require('./adminRoutes');
+import { router as authRoutes } from './authRoutes.js';
+import { router as groupRoutes } from './groupRoutes.js';
+import { router as groupMessageRoutes } from './groupMessageRoutes.js';
+import { router as adminRoutes } from './adminRoutes.js';
 
-module.exports = {
+export {
   authRoutes,
-  userRoutes,
   groupRoutes,
   groupMessageRoutes,
   adminRoutes,

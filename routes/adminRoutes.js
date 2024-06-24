@@ -1,7 +1,10 @@
-const router = require('express').Router();
-const { adminController } = require('../controllers');
+import { Router } from 'express';
+import { createUser, editUser } from '../controllers/adminController.js';
 
-router.post('/createUser', adminController.createUser); // POST /api/admin/createUser (Create new user)
-router.put('/user/:id', adminController.editUser); // PUT /api/admin/user/:id (Edit user)
 
-module.exports = router;
+const router = Router();
+
+router.post('/createUser', createUser); // POST /api/admin/createUser (Create new user)
+router.put('/user/:id', editUser); // PUT /api/admin/user/:id (Edit user)
+
+export { router };
